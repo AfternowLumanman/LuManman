@@ -1,13 +1,16 @@
-var koa=require('koa'),
-    router=require('koa-router'),
-    views=require('koa-views'),
+const Koa=require('koa'),
+    router=require('koa-router')(),
     static=require('koa-static'),
+    views=require('koa-views'),
     render=require('koa-art-template'),
     path=require('path'),
     bodyParser=require('koa-bodyparser');
 
+//引入模块
+var system=require('./routes/system.js');
+
 //实例化
-var app=new koa();
+var app=new Koa();
 
 //模板引擎设置
 render(app, {
@@ -23,22 +26,18 @@ app.use(bodyParser());
 app.use(static('static'));
 
 //错误处理中中间件
-app.use(async (ctx,next)=>{
+/* app.use(async (ctx,next)=>{
     next();
-
     if(ctx.status!=200){
         let status=ctx.status;
-        await ctx.render('404',{
+        await ctx.render('system/error',{
             status
         });
     }
 })
+ */
 
-//引入模块
-var system=require('./routes/system.js');
-var user=require('./routes/user.js');
-
-router.use('/user',user);
+//配置层级路由
 router.use(system);
 
 //启动路由
