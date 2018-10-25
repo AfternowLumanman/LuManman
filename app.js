@@ -1,7 +1,6 @@
 const Koa=require('koa'),
     router=require('koa-router')(),
     static=require('koa-static'),
-    views=require('koa-views'),
     render=require('koa-art-template'),
     path=require('path'),
     bodyParser=require('koa-bodyparser');
@@ -23,10 +22,10 @@ render(app, {
 app.use(bodyParser());
 
 //指定静态文件
-app.use(static('static'));
+app.use(static(path.join(__dirname, 'static')));
 
 //错误处理中中间件
-/* app.use(async (ctx,next)=>{
+app.use(async (ctx,next)=>{
     next();
     if(ctx.status!=200){
         let status=ctx.status;
@@ -35,7 +34,6 @@ app.use(static('static'));
         });
     }
 })
- */
 
 //配置层级路由
 router.use(system);
