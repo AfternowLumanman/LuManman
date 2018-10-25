@@ -7,7 +7,7 @@ var koa=require('koa'),
     bodyParser=require('koa-bodyparser');
 
 //实例化
-var app=new Koa();
+var app=new koa();
 
 //模板引擎设置
 render(app, {
@@ -21,7 +21,6 @@ app.use(bodyParser());
 
 //指定静态文件
 app.use(static('static'));
-
 
 //错误处理中中间件
 app.use(async (ctx,next)=>{
