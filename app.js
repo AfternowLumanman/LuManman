@@ -36,11 +36,11 @@ app.use(async (ctx,next)=>{
 })
 
 //引入模块
-var admin=require('./routes/admin.js');
+var system=require('./routes/system.js');
 var user=require('./routes/user.js');
 
 router.use('/user',user);
-router.use(admin);
+router.use(system);
 
 //启动路由
 app.use(router.routes()).use(router.allowedMethods());
